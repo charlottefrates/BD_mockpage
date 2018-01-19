@@ -161,30 +161,6 @@
 						<img id="punchoutLogoImage" src style="display:none" >
 					</li>
 					<li id="header_field3" class="cart">
-<script id="miniCartTemplate" type="text/x-jquery-tmpl">
-							/*<![CDATA[*/
-								<dt>{{= totalItems}} item(s) - </dt>
-								<dd>{{= subTotal.formattedValue}}</dd>
-							/*]]>*/
-						</script>
-
-<script type="text/javascript">
-	$(document).ready(function() {
-		$('#btnCart').click(function() {
-			$('#spinner_minicart').show();
-			setTimeout(function() {
-				$('#spinner_minicart').hide()
-			}, 2000);
-
-		});
-	});
-</script>
-<script type="text/javascript">
-	// set vars	
-	var rolloverPopupUrl = '/us/cart/rollover/BDMiniCartComponent';
-	var refreshMiniCartUrl = '/us/cart/miniCart/SUBTOTAL/?';
-</script>
-
 <div id="cart_header" >
 
 	<div id="cart_content" > 
@@ -219,77 +195,7 @@
 </div>
 
 
-<script type="text/javascript">
-	var loggedIn = 'false';
-	var selectedRegion = 'US';
-	var changeRegionUrl = '/us/changeRegion';
-	var removeSessionCartUrl = '/us/changeRegion/removeCart';
-	//var actionUrl = '';
-			
-	function beforeLogin()
-	{
-		var email = $('#j_username').val();
-		var password = $('#j_password').val();
-		document.getElementById('validatepwdlabel').style.display="none";  
-		document.getElementById('validateemaillabel').style.display="none";  
-		document.getElementById('validateemailllabel').style.display="none";  
-	    if(email.length<=0 && password.length<=0){
-			document.getElementById('validateemaillabel').style.display="";
-			return false;
-		}
-		else if(email.length <=0){
-				document.getElementById('validateemailllabel').style.display="";  
-				return false;
-		}
-		else if(password.length <=0){
-			document.getElementById('validatepwdlabel').style.display="";  
-			return false;
-		}
-		
-		
-		$.ajax({
-			type: 'GET',
-			url: changeRegionUrl,
-			data: {email:email},
-			success: function(result) {
-				$.modal.close();
-				$('#colorbox').hide();
-				if (result.msg == "")
-				{
-					$('#loginForm').submit();
-				}
-				else
-				{
-					$('#onLoginRegionChangePopup #message').html(result.msg);
-					$('#onLoginRegionChangePopup.simplemodal-data_add').modal();
-				}
-			},
-			error: function(result) {
-				$.modal.close();
-				$('#colorbox').hide();
-				$('#onLoginRegionChangePopup').html('Problem in fetching user country.');
-				$('#onLoginRegionChangePopup.simplemodal-data_add').modal();
-				return false;
-			}
-		});
-	}
-	
-	function submitLoginForm()
-	{
-		$.ajax({
-			type: 'GET',
-			url: removeSessionCartUrl,
-			success: function(result) {
-				$('#loginForm').submit();
-				return true;
-			},
-			error: function(result) {
-				$('#loginForm').submit();
-				return false;
-			}
-		});
-	}
-</script>
+
 
 <div id="onLoginRegionChangePopup" class="simplemodal-data_add">
 	<p id="message">
@@ -308,16 +214,7 @@
 	</div>
 </div>
  
-<script type="text/javascript">
-	
-	$(document).ready(function(){
-	    var hasErrors = '';
-	    if (hasErrors == 'YES') {
-	    	$('#unavailable_product').modal();
-	    }
-	});
-</script>	 <!-- <a id="skiptonavigation"></a> -->
-				<script type="text/javascript" src="//static.bdbiosciences.com/y/common/js/jquery-1.7.2.min.js"></script>	
+<script type="text/javascript" src="//static.bdbiosciences.com/y/common/js/jquery-1.7.2.min.js"></script>	
 
 <div class="menu_container">
 	<div id="nav_main" class="nav_main">
@@ -436,24 +333,9 @@
 </div>
 </div>
 
-<script type="text/javascript">
-function  emptySearchCheck()
-{
-	if ((document.getElementById("s_input").value == "") || (document.getElementById("s_input").value == null)) {
-		return false;
-	}
-}
-</script>
 
-<script type="text/javascript">
-$('#headerSearch').submit(function() {
-	var searchPath = '/solrSearch';
-    $('#spinnerSearch').show();
-    $.post(searchPath, function() {
-        $('#spinnerSearch').hide();
-    });
- });
-</script><div id="container">
+
+<div id="container">
 			
 				<div id="content" class="instruments">
 				   
@@ -606,10 +488,6 @@ function displayTab(index) {
 	$('#tab' + index).show(); 
 }
 
-function submitAddToCartForm() 
-{
-    $('#addToCartForm').submit();
-}  
 
 var getVariantDataUrl = '/us/applications/research/bead-based-immunoassays/bd-cba-flex-sets/enhanced-sensitivity/human/human-tnf-enhanced-sensitivity-flex-set/p/561516/getVariantData';
 var spectrumViewerPage = '/us/applications/s/spectrumviewer';
@@ -787,23 +665,7 @@ function hideEmptyTabs() {
 	}
 }
 
-function displayZoomImages(zoomImageUrl, galleryPosition) {
-	$.ajax({
-		type: 'GET',
-		url: zoomImageUrl,
-		data: {galleryPosition:galleryPosition},
-		success: function(response) {
-			$('#cat_img').html(response);
-			$('#img' + galleryPosition + '_zoom').css('display','block');
-			$('#imgThumnail' + galleryPosition).addClass('selected');
-			$('#cat_img').modal({minWidth:990});
-		    $('div#simplemodal-container').css("position","absolute");
-		},
-		error: function(response) {
-			$('#cat_img').html('Problem in displaying images');
-		}
-	});
-}
+
 
 function switchZoomImage(galleryPosition) {
 	$('.images_zoom').css('display','none');
